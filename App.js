@@ -14,6 +14,7 @@ import { createStore, applyMiddleware } from 'redux';
 import reducers from './src/reducers/';
 import ReduxThunk from 'redux-thunk';
 
+
 export default class App extends React.Component {
 
 	componentWillMount(){

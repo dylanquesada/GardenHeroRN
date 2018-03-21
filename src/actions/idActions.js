@@ -1,6 +1,39 @@
 import firebase from 'firebase';
 import { Actions } from 'react-native-router-flux';
 
+export const addItem = (itemName) => {
+	return {
+		type: 'ADD_ITEM_TO_LIST',
+		itemName: itemName
+	};
+};
+
+export const deleteItem = () => {
+	return { 
+		type: 'DELETE_ITEM_FROM_LIST'
+	};
+};
+
+export const selectItem = (name) => {
+	return {
+		type: 'SELECT_ITEM',
+		itemName: name
+	};
+};
+
+export const deselectItem = () => {
+	return{
+		type: 'DESELECT_ITEM'
+	};
+};
+
+export const deleteItemFromSelector = (name) => {
+	return {
+		type: 'DELETE_ITEM_WITH_NAME',
+		itemName: name
+	};
+};
+
 export async function readFirebase(path){
 	var data = await firebase.database().ref(path).once('value')
 		.then(function(dataSnapshot){

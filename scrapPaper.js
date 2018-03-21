@@ -162,3 +162,64 @@
 // };
 
 // const readFirebase = ({prop, })
+
+class PlanGarden extends Component{
+	state = {
+		modalVisible: false,
+	};
+
+	setModalVisible(visible){
+		this.setState({modalVisible: visible});
+	}
+
+	render() {
+    	return (
+	      	<View style={{margin: 10}}>
+	      		<Modal
+	      			animationType="slide"
+	      			transparent={false}
+	      			visible={this.state.modalVisible}
+	      			onRequestClose={() => {
+	      				console.log("modal closed, experience.state: (unimplemented)");
+	      				this.setState({modalVisible: visible});
+	      			}}
+	      		>
+	      			<Card>
+				        <Picker
+				            selectedValue={this.props.experience}
+				            onValueChange={(itemValue, itemIndex) => this.props.userUpdate({ prop: 'experience', value: itemValue})} >
+				            <Picker.Item label="None" value="java" />
+				            <Picker.Item label="Years" value="years" />
+				            <Picker.Item label="Years" value="years" />
+				            <Picker.Item label="Years" value="years" />
+				        </Picker>
+				        <TouchableHighlight
+				        	onPress={() => {
+				        		this.setModalVisible(!this.state.modalVisible);
+				        	}}>
+			            	<Text>Hide Modal!</Text>
+			            </TouchableHighlight>
+		            </Card>
+		        </Modal>
+		        <TouchableHighlight
+          			onPress={() => {
+            			this.setModalVisible(true);
+          			}}>
+          			<Text>Show Modal</Text>
+        		</TouchableHighlight>        
+	      </View>
+    	)
+  	}
+}
+
+
+// <TouchableHighlight
+						// style={this.getStyle.bind(this)} 
+						// selected={false}
+						// 	onPress={() => {
+						// 		this.onPressImage(!this.props.styleToggle);
+						// 	}}>
+						// 	<Image
+						// 		style={style.imageStyle}
+						// 		source={require('../pictures/aubergine.png')}
+						// 	/>

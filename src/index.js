@@ -6,7 +6,10 @@ import Login from './screens/Login';
 import PageTwo from './screens/PageTwo';
 import Account from './screens/Account';
 import MyGarden from './screens/MyGarden';
+import PlanGarden from './screens/PlanGarden';
 import PlantProfiles from './screens/PlantProfiles';
+import ShoppingList from './screens/ShoppingList';
+import SelectPlants from './screens/SelectPlants';
 import TeachMe from './screens/TeachMe';
 import ToDo from './screens/ToDo';
 import { PlantProfilesIcon, MyGardenIcon, ToDoIcon, TeachMeIcon, AccountIcon } from './components/tabIcons';
@@ -88,6 +91,9 @@ export default class Index extends React.Component {
                   title='Account'/>    
               </Scene>
             </Scene>
+            <Scene key="planGarden" component={PlanGarden} title="Plan My Garden" />
+            <Scene key="shoppingList" component={ShoppingList} title="Shopping List" /> 
+            <Scene key="selectPlants" component={SelectPlants} title="Select Plants" /> 
         </Scene>
       </Router>
     );

@@ -22,6 +22,10 @@ class MyGarden extends Component {
     console.log("x: " + x);
     this.props.userUpdate({ prop: "numberOfPlants", value: x});
   }
+  onNavPress(){
+    console.log("Actions.planGarden();");
+    Actions.planGarden();
+  }
   renderTrackerOrPrompt(){
     this.props.numberOfPlants = 2;
     let garden = [{
@@ -82,7 +86,11 @@ class MyGarden extends Component {
         onPress={this.onReadPress.bind(this)}
         title='read numb'
         />
-        <Text>numberOfPlants: {this.props.numberOfPlants}!</Text>        
+        <Text>numberOfPlants: {this.props.numberOfPlants}!</Text>
+        <Button 
+        onPress={this.onNavPress.bind(this)}
+        title='To Plan Garden -->'
+        />        
       </View>
     )
   }

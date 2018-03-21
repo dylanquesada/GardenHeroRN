@@ -6,7 +6,10 @@ export default (state={
 	error: '',
 	loading: false,
 	experience: '',
-	numberOfPlants: 0
+	numberOfPlants: 0,
+	weeklyHours: '',
+	array: [],
+	selectedItem: null
 	 }, action) => {
 	console.log(action);
 	switch(action.type) {
@@ -36,6 +39,39 @@ export default (state={
 			break;
 		case  'LOG_OUT_USER':
 			return {};
+		case 'ADD_ITEM_TO_LIST':
+			return {...state, 
+				array: state.array.concat({
+				name: action.name
+			})
+		};
+		case 'DELETE_ITEM_FROM_LIST':
+			return{
+				...state,
+				array: state.array.filter(item => {
+					return array.name !== state.selectedItem.name;
+				}),
+				selectedItem: null
+			};
+		case 'DELETE_ITEM_WITH_NAME':
+			return{
+				...state,
+				array: state.array.filter(item => {
+					return item.name !== action.itemName;
+				})
+			};
+		case 'SELECT_ITEM':
+			return{
+				...state,
+				selectedItem: state.array.find(item => {
+					return place.name === action.itemName;
+				})
+			};
+		case 'DESELECT_ITEM':
+			return{
+				...state,
+				selectedItem: null
+			};
 		}
 	return state;
 }

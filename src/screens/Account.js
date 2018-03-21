@@ -1,13 +1,16 @@
 import React from "react";
 import { View, Text, Button } from "react-native";
 import { Actions } from 'react-native-router-flux';
-import { logOutUser } from '../actions/idActions';
+import { logOutUser, popSettingsCard } from '../actions/idActions';
 import { connect } from 'react-redux';
 
 class Account extends React.Component{
 	onLogOutPress(){
 		const { error, loading } = this.props;
 		this.props.logOutUser();
+	}
+	onSettingsPress(){
+		this.popSettingsCard();
 	}
 	render(){
 		return(
@@ -16,6 +19,10 @@ class Account extends React.Component{
 				<Button 
 				onPress={this.onLogOutPress.bind(this)}
 				title='Log Out'
+				/>	
+				<Button 
+				onPress={this.onSettingsPress.bind(this)}
+				title='Settings'
 				/>			
   			</View>
 		)

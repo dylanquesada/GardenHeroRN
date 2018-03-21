@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Platform, StatusBar, View, Text, Image, Keyboard, StyleSheet, TouchableWithoutFeedback, KeyboardAvoidingView, Button } from 'react-native';
+import { ActivityIndicator, Platform, StatusBar, View, Text, Image, Keyboard, StyleSheet, TouchableWithoutFeedback, KeyboardAvoidingView, Button } from 'react-native';
 import { FormLabel, FormInput, Card } from 'react-native-elements';
 import { Actions } from 'react-native-router-flux';
 import { setID, logInUser, signUpUser, userUpdate } from '../actions/idActions';
@@ -22,7 +22,7 @@ class Login extends Component {
     if(this.props.loading){
       return(
         <View> 
-          <Text>Loading...</Text>
+          <ActivityIndicator size='large' color='#81c404' />
         </View>
       )
     }
