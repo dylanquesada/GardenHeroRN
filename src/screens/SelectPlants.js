@@ -124,8 +124,8 @@ class SelectPlants extends React.Component{
 }
 
 const mapStateToProps = (state) => {
-	const { error, loading } = state.id;
-	return { error, loading };
+	const {  array } = state.id;
+	return {  array };
 };
 
 export default connect(mapStateToProps, {

@@ -1,18 +1,42 @@
 import React, {Component}from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
+import { View, Text, StyleSheet, Image, Dimensions, Platform } from "react-native";
 import { Card } from 'react-native-elements';
 import Carousel from 'react-native-snap-carousel';
 
+const { width: viewportWidth, height: viewportHeight } = Dimensions.get('window');
+
+// function wp (percentage) {
+//     const value = (percentage * viewportWidth) / 100;
+//     return Math.round(value);
+// }
+
+// const slideHeight = viewportHeight * 0.36;
+// const slideWidth = wp(75);
+// const itemHorizontalMargin = wp(2);
 export default class PlantProfiles extends Component{
 	_renderItem ({item, index}){
 		return(
-      <Card>
-  			<View style={styles.slide}>
-  				<Text style={styles.title}>{ item.title }</Text>
-  				<Image 
-        				source={require('../pictures/account.png')}
-        				style={{width: 99, height: 100, resizeMode: 'contain'}}
-        			/>
+      <Card style={styles.slide}>
+  			<View>
+  				{item.illustration}
+          <View style={{flexDirection: 'row'}}>
+            <Image
+              source={require('../pictures/sun.png')}
+              style={styles.iconStyle}
+            /><Text>{item.sun}</Text>
+          </View>
+          <View style={{flexDirection: 'row'}}>
+            <Image
+              source={require('../pictures/watering-can.png')}
+              style={styles.iconStyle}
+            /><Text>{item.watering}</Text>
+          </View>
+          <View style={{flexDirection: 'row'}}>
+            <Image
+              source={require('../pictures/thermometer.png')}
+              style={styles.iconStyle}
+            /><Text>{item.climate}</Text>
+          </View>
   			</View>
       </Card>
 		);
@@ -21,44 +45,80 @@ export default class PlantProfiles extends Component{
 		let list = [
     {
         title: 'Tomatoes',
-        subtitle: 'Lorem ipsum dolor sit amet et nuncat mergitur',
-        illustration: 'https://i.imgur.com/UYiroysl.jpg'
+        watering: 'Needs to be watered 2x a week',
+        sun: 'Requires full sun',
+        climate: 'Grows best in warm climates',
+        illustration: <Image 
+          source={require('../pictures/tomato.png')}
+          style={styles.pictureInternal}
+        />
     },
     {
-        title: 'Earlier this morning, NYC',
-        subtitle: 'Lorem ipsum dolor sit amet',
-        illustration: 'https://i.imgur.com/UPrs1EWl.jpg'
+        title: 'Cabbage',
+        watering: 'Needs to be watered 2x a week',
+        sun: 'Requires full sun',
+        climate: 'Grows best in warm climates',       
+        illustration: <Image 
+          source={require('../pictures/cabbage.png')}
+          style={styles.pictureInternal}
+        />
     },
     {
-        title: 'White Pocket Sunset',
-        subtitle: 'Lorem ipsum dolor sit amet et nuncat ',
-        illustration: 'https://i.imgur.com/MABUbpDl.jpg'
+        title: 'Carrots',
+        watering: 'Needs to be watered 2x a week',
+        sun: 'Requires full sun',
+        climate: 'Grows best in warm climates',        illustration: <Image 
+          source={require('../pictures/plantprofiles.png')}
+          style={styles.pictureInternal}
+        />
     },
     {
-        title: 'Acrocorinth, Greece',
-        subtitle: 'Lorem ipsum dolor sit amet et nuncat mergitur',
-        illustration: 'https://i.imgur.com/KZsmUi2l.jpg'
+        title: 'Bell-Peppers',
+        watering: 'Needs to be watered 2x a week',
+        sun: 'Requires full sun',
+        climate: 'Grows best in warm climates',
+        illustration: <Image 
+          source={require('../pictures/bell-pepper.png')}
+          style={styles.pictureInternal}
+        />
     },
     {
-        title: 'The lone tree, majestic landscape of New Zealand',
-        subtitle: 'Lorem ipsum dolor sit amet',
-        illustration: 'https://i.imgur.com/2nCt3Sbl.jpg'
+        title: 'Eggplant',
+        watering: 'Needs to be watered 2x a week',
+        sun: 'Requires full sun',
+        climate: 'Grows best in warm climates',
+        illustration: <Image 
+          source={require('../pictures/aubergine.png')}
+          style={styles.pictureInternal}
+        />
     },
     {
-        title: 'Middle Earth, Germany',
-        subtitle: 'Lorem ipsum dolor sit amet',
-        illustration: 'https://i.imgur.com/lceHsT6l.jpg'
+        title: 'Kale',
+        watering: 'Needs to be watered 2x a week',
+        sun: 'Requires full sun',
+        climate: 'Grows best in warm climates',
+        illustration: <Image 
+          source={require('../pictures/lettuce.png')}
+          style={styles.pictureInternal}
+        />
     }
 ];
 		return(
-			<Carousel
-				ref={(c) => { this._carousel = c; }}
-				data={list}
-				renderItem={this._renderItem}
-				sliderWidth={300}
-				itemWidth={100}
-        itemHeight={500}
-			/>
+      <View style={{
+        backgroundColor: 'white', 
+        height: 550
+      }}>
+  			<Carousel       
+  				ref={(c) => { this._carousel = c; }}
+  				data={list}
+          firstItem={0}
+  				renderItem={this._renderItem}
+  				sliderWidth={viewportWidth}
+          sliderHeight={100}
+  				itemWidth={viewportWidth - 100}
+          enableSnap={true}          
+  			/>
+      </View>
 
 		);
 	}
@@ -66,10 +126,20 @@ export default class PlantProfiles extends Component{
 
 let styles = StyleSheet.create({
   slide: {
-  	flex: 1,
-    alignContent: 'space-between',
+  	alignContent: 'space-between',
+    height: 500, 
+    width: viewportWidth
   },
+
   title:{
-  	color: 'red'
-  }  
+  	color: 'black'
+  }, 
+  pictureInternal: {
+    width: 150,
+    height: 150
+  }, 
+  iconStyle: {
+    height: 50,
+    width: 50
+  } 
 });

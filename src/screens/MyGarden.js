@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Button, Picker, ScrollView } from 'react-native';
+import { View, Text, Button, Picker, ScrollView, ActivityIndicator } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import firebase from 'firebase';
 import { userUpdate, firebaseUpdate, getUserName, readFirebase, writeFirebase, userUpdateInternal } from '../actions/idActions';
@@ -25,6 +25,16 @@ class MyGarden extends Component {
   onNavPress(){
     console.log("Actions.planGarden();");
     Actions.planGarden();
+  }
+  renderPlantButtonOrLoading(){
+    if(this.props.loading){
+      return(
+        <ActivityIndicator 
+          size='large'
+          color='black'
+        />
+      )
+    }
   }
   renderTrackerOrPrompt(){
     this.props.numberOfPlants = 2;
@@ -68,24 +78,7 @@ class MyGarden extends Component {
     return (
       <View style={{margin: 10}}>
         {this.renderTrackerOrPrompt()}
-        <TrackerElement 
-          type="test"
-          percentComplete={0.5}
-        />
-        <Picker
-            selectedValue={this.props.experience}
-            onValueChange={(itemValue, itemIndex) => this.props.userUpdate({ prop: 'experience', value: itemValue})} >
-            <Picker.Item label="None" value="java" />
-            <Picker.Item label="Years" value="years" />
-        </Picker>
-        <Button 
-        onPress={this.onNextPress.bind(this)}
-        title='log the user from db'
-        />
-                <Button 
-        onPress={this.onReadPress.bind(this)}
-        title='read numb'
-        />
+
         <Text>numberOfPlants: {this.props.numberOfPlants}!</Text>
         <Button 
         onPress={this.onNavPress.bind(this)}

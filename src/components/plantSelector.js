@@ -32,10 +32,11 @@ class PlantSelector extends Component{
 		this.setState({borderToggle: !this.state.borderToggle});
 		console.log("pressed: visible: " + this.state.borderToggle);
 		if(!this.state.borderToggle){
-			this.props.addItem(this.props.name)
+			console.log('add :' + this.props.name)
+			addItem(this.props.name)
 		}
 		else{
-			this.props.deleteItemFromSelector(this.props.name)
+			deleteItemFromSelector(this.props.name)
 		}
 
 	}

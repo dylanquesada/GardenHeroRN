@@ -5,6 +5,7 @@ import { createStore } from 'redux';
 import Login from './screens/Login';
 import PageTwo from './screens/PageTwo';
 import Account from './screens/Account';
+import AddPlant from './screens/AddPlant';
 import MyGarden from './screens/MyGarden';
 import PlanGarden from './screens/PlanGarden';
 import PlantProfiles from './screens/PlantProfiles';
@@ -54,12 +55,12 @@ export default class Index extends React.Component {
                   component={MyGarden}
                   title='MyGarden'/>    
               </Scene>
-              <Scene key="toDo" title="To Do" icon={ToDoIcon}>
+              <Scene key="toDo" title="To-Do" icon={ToDoIcon}>
 
                 <Scene 
                   key="toDo"
                   component={ToDo} 
-                  title='ToDo' 
+                  title='Care Schedule' 
                   initial />      
                 <Scene
                   key="toDo"
@@ -93,7 +94,8 @@ export default class Index extends React.Component {
             </Scene>
             <Scene key="planGarden" component={PlanGarden} title="Plan My Garden" />
             <Scene key="shoppingList" component={ShoppingList} title="Shopping List" /> 
-            <Scene key="selectPlants" component={SelectPlants} title="Select Plants" /> 
+            <Scene key="selectPlants" component={SelectPlants} title="Select Plants" />
+            <Scene key="addPlant" component={AddPlant} title="Add Plant" /> 
         </Scene>
       </Router>
     );

@@ -1,13 +1,15 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 
-const listItem = props => (
-  <TouchableOpacity onPress={props.onItemPressed}>
-    <View style={styles.listItem}>
-      <Text>{props.itemName}</Text>
-    </View>
-  </TouchableOpacity>
-);
+export const ListItem = (props) => {
+  return(
+    <TouchableOpacity onPress={() => {console.log('success.')}}>
+      <View style={styles.listItem}>
+        <Text>{props.title}</Text>
+      </View>
+    </TouchableOpacity>
+  );
+};
 
 const styles = StyleSheet.create({
   listItem: {
@@ -25,4 +27,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default listItem;
+//export default { ListItem } ;

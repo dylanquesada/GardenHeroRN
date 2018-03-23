@@ -1,22 +1,18 @@
 import React from "react";
 import { StyleSheet, FlatList } from "react-native";
 
-import ListItem from "./listItem";
+import { ListItem } from "./listItem";
 
-const ShoppingFlatList = props => {
-  return (
-    <FlatList
-      style={styles.listContainer}
-      data={props.array}
-      renderItem={(info) => (
-        <ListItem
-          itemName={info.item.name}
-          onItemPressed={() => props.onItemSelected(info.item.name)}
-        />
-      )}
-    />
-  );
-};
+export default class ShoppingFlatList extends React.Component{
+  render(){
+    return (
+      <FlatList
+        data={this.props.data}
+        renderItem={({ item }) =>(<ListItem title={item.title}/>) } 
+      />
+    );
+  };
+}
 
 const styles = StyleSheet.create({
   listContainer: {
@@ -24,4 +20,3 @@ const styles = StyleSheet.create({
   }
 });
 
-export default ShoppingFlatList;

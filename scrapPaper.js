@@ -211,7 +211,24 @@ class PlanGarden extends Component{
     	)
   	}
 }
-
+        <TrackerElement 
+          type="test"
+          percentComplete={0.5}
+        />
+        <Picker
+            selectedValue={this.props.experience}
+            onValueChange={(itemValue, itemIndex) => this.props.userUpdate({ prop: 'experience', value: itemValue})} >
+            <Picker.Item label="None" value="java" />
+            <Picker.Item label="Years" value="years" />
+        </Picker>
+        <Button 
+        onPress={this.onNextPress.bind(this)}
+        title='log the user from db'
+        />
+                <Button 
+        onPress={this.onReadPress.bind(this)}
+        title='read numb'
+        />
 
 // <TouchableHighlight
 						// style={this.getStyle.bind(this)} 

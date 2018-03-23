@@ -15,7 +15,8 @@ class Login extends Component {
   	onSignUpPress(){
   		this.props({loading: true});
   		const{email, password} = this.props;
-
+      this.props.signUpUser({ email, password });
+      Keyboard.dismiss();
   	}
 
     renderButtonOrLoading(){
@@ -27,14 +28,18 @@ class Login extends Component {
       )
     }
     return(
-      <View style={{ alignContent: 'space-between'}}>
-        <Button
-          onPress={this.onLoginPress.bind(this)}
-          title='Login'/> 
-        <Button
-          onPress={this.onSignUpPress.bind(this)}
-          title='Sign up'/>
+      <View style={{ justifyContent: 'space-between'}}>
+        <View style={{ justifyContent: 'space-around'}}>
+          <Button
+            onPress={this.onLoginPress.bind(this)}
+            title='Login'/> 
         </View>
+        <View style={{ justifyContent: 'space-around', marginTop: 5}}>
+          <Button
+            onPress={this.onSignUpPress.bind(this)}
+            title='Sign up'/>
+        </View>
+      </View>
       )
     }
 

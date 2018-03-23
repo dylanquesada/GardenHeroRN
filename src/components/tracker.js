@@ -8,8 +8,8 @@ export default class TrackerElement extends React.Component{
 			<View>
 				<Text>{this.props.type}</Text>
 				<Progress.Bar 
-				progress={this.props.percentComplete}
-				width={200} 
+					progress={this.props.percentComplete}
+					width={200} 
 				/>
 			</View>
 		)
