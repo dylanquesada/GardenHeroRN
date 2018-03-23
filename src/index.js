@@ -33,12 +33,12 @@ export default class Index extends React.Component {
               navBarStyle={style.titleStyle}
             >
 
-              <Scene key="plantProfiles" title="P P" icon={PlantProfilesIcon}>
+              <Scene key="plantProfiles" title="Plant Facts" icon={PlantProfilesIcon}>
 
                 <Scene 
                   key="plantProfiles"
                   component={PlantProfiles} 
-                  title='PlantProfiles' 
+                  title='Plant Profiles' 
                   showLabel={false}
                   initial />      
    
@@ -48,12 +48,12 @@ export default class Index extends React.Component {
                 <Scene 
                   key="myGarden"
                   component={MyGarden} 
-                  title='MyGarden' 
+                  title='My Garden' 
                   initial />      
                 <Scene
                   key="myGarden"
                   component={MyGarden}
-                  title='MyGarden'/>    
+                  title='My Garden'/>    
               </Scene>
               <Scene key="toDo" title="To-Do" icon={ToDoIcon}>
 
@@ -72,12 +72,12 @@ export default class Index extends React.Component {
                 <Scene 
                   key="teachMe"
                   component={TeachMe} 
-                  title='TeachMe' 
+                  title='Teach Me' 
                   initial />      
                 <Scene
-                  key="TeachMe"
+                  key="Teach Me"
                   component={TeachMe}
-                  title='TeachMe'/>    
+                  title='Teach Me'/>    
               </Scene>
               <Scene key="account" title="Account" icon={AccountIcon}>
 

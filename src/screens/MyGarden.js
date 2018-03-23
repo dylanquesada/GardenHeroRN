@@ -88,7 +88,7 @@ class MyGarden extends Component {
     return (
       <View style={{margin: 10}}>
         {this.renderTrackerOrPrompt()}
-
+        {this.renderPlantButtonOrLoading()}
         <Text>numberOfPlants: {this.props.numberOfPlants}!</Text>
         <Button 
           onPress={this.onNavPress.bind(this)}
