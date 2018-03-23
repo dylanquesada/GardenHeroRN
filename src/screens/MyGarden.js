@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, Button, Picker, ScrollView, ActivityIndicator } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import firebase from 'firebase';
-import { userUpdate, firebaseUpdate, getUserName, readFirebase, writeFirebase, userUpdateInternal } from '../actions/idActions';
+import { userUpdate, firebaseUpdate, getUserName, readFirebase, writeFirebase, userUpdateInternal, addPlant } from '../actions/idActions';
 import { connect } from 'react-redux';
 import { FormLabel, FormInput, Card } from 'react-native-elements';
 import TrackerElement from '../components/tracker';
@@ -10,7 +10,9 @@ import TrackerElement from '../components/tracker';
 
 class MyGarden extends Component {
 
-
+  onAddPlantPress(){
+    Actions.addPlant();
+  }
   async onNextPress(){
     let test = await getUserName();
     console.log("pressed button: " + test);
@@ -32,6 +34,14 @@ class MyGarden extends Component {
         <ActivityIndicator 
           size='large'
           color='black'
+        />
+      )
+    }
+    else {
+      return(
+        <Button
+          onPress={this.onAddPlantPress.bind(this)}
+          title='Add a plant'
         />
       )
     }
@@ -81,8 +91,8 @@ class MyGarden extends Component {
 
         <Text>numberOfPlants: {this.props.numberOfPlants}!</Text>
         <Button 
-        onPress={this.onNavPress.bind(this)}
-        title='To Plan Garden -->'
+          onPress={this.onNavPress.bind(this)}
+          title='To Plan Garden -->'
         />        
       </View>
     )

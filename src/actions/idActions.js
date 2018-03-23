@@ -1,36 +1,45 @@
 import firebase from 'firebase';
 import { Actions } from 'react-native-router-flux';
 
-export const addItem = (itemName) => {
-	return {
-		type: 'ADD_ITEM_TO_LIST',
-		itemName: itemName
+export function addItem(itemName){
+	return(dispatch) => {
+		dispatch({
+			type: 'ADD_ITEM_TO_LIST',
+			itemName: itemName
+		});
 	};
 };
 
-export const deleteItem = () => {
-	return { 
-		type: 'DELETE_ITEM_FROM_LIST'
+export function deleteItem(){
+	return(dispatch) => {
+		dispatch({ 
+			type: 'DELETE_ITEM_FROM_LIST'
+		});
 	};
 };
 
-export const selectItem = (name) => {
-	return {
-		type: 'SELECT_ITEM',
-		itemName: name
+export function selectItem(name){
+	return(dispatch) => {
+		dispatch({
+			type: 'SELECT_ITEM',
+			itemName: name
+		});
 	};
 };
 
-export const deselectItem = () => {
-	return{
-		type: 'DESELECT_ITEM'
+export function deselectItem(){
+	return(dispatch) => {
+		dispatch({
+			type: 'DESELECT_ITEM'
+		});
 	};
 };
 
-export const deleteItemFromSelector = (name) => {
-	return {
-		type: 'DELETE_ITEM_WITH_NAME',
-		itemName: name
+export function deleteItemFromSelector(name){
+	return(dispatch) => {
+		dispatch({
+			type: 'DELETE_ITEM_WITH_NAME',
+			itemName: name });
 	};
 };
 
