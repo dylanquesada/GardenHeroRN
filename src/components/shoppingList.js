@@ -8,7 +8,7 @@ export default class ShoppingFlatList extends React.Component{
     return (
       <FlatList
         data={this.props.data}
-        renderItem={({ item }) =>(<ListItem title={item.title}/>) } 
+        renderItem={({ item }) =>(<ListItem title={item.name}/>) } 
       />
     );
   };

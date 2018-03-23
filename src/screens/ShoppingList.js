@@ -23,14 +23,8 @@ class ShoppingList extends Component{
 		let newArray = this.props.array;
 		let groceryList = [];
 		for(let i = 0; i < newArray.length; i++){
-			console.log(newArray[i]);
-			groceryList.push(
-          		<View key={i}>
-            		<ListItem
-              			title={newArray[i].name}
-            		/>
-          		</View>
-        	)
+			console.log('newArray[i]: ' + newArray[i].name);
+			groceryList.push(newArray[i]);
 		}
 		return(
 			<View>

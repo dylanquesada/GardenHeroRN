@@ -42,7 +42,7 @@ export default (state={
 		case 'ADD_ITEM_TO_LIST':
 			return {...state, 
 				array: state.array.concat({
-				name: action.name
+				name: action.itemName
 			})
 		};
 		case 'DELETE_ITEM_FROM_LIST':
