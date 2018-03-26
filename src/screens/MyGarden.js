@@ -100,8 +100,8 @@ class MyGarden extends Component {
 }
 
 const mapStateToProps = (state) => {
-  const { experience, error, loading, numberOfPlants, email } = state.id;
-  return { experience, error, loading, numberOfPlants, email }; 
+  const { experience, error, numberOfPlants, email } = state.id;
+  return { experience, error, numberOfPlants, email }; 
 };
 
 export default connect(mapStateToProps, {

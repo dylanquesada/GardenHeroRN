@@ -10,6 +10,30 @@ export function addItem(itemName){
 	};
 };
 
+export async function addPlantToFirebase(name, date){
+	var db = firebase.database();
+	let userID = await getUserName();
+	let path = 'users/' + userID + '/garden/plants/0';
+	console.log("path: " + path);
+	var numberOfPlants = await readFirebase(path);
+	console.log("numberOfPlants.numberOfPlants: " + numberOfPlants.numberOfPlants);
+	console.log("Path: " + path);
+	numberOfPlants.numberOfPlants += 1;
+	numberOfPlants = numberOfPlants.numberOfPlants;
+	console.log('numberOfPlants: ' + numberOfPlants);
+	path = userID + '/garden/plants/' + numberOfPlants.toString();
+	console.log("path before first write: " + path);
+	db.ref("users/" + path).set({
+		type: name,
+		plantDate: plantDate
+	});
+	return(dispatch) => {
+		dispatch({
+			type: 'ADD_PLANT_TO_FIREBASE'
+		});
+	};
+};
+
 export function deleteItem(){
 	return(dispatch) => {
 		dispatch({ 
@@ -51,7 +75,7 @@ export async function readFirebase(path){
 		return value;
 }
 
-export function writeFirebase(path, prop, value){
+function writeFirebase(path, prop, value){
 	console.log("path: " + path);
 	console.log("prop: " + prop);
 	console.log("value: " + value);

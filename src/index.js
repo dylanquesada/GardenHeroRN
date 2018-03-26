@@ -22,7 +22,7 @@ export default class Index extends React.Component {
     return (      
       <Router>
         <Scene key='root' navBarStyle={style.titleStyle}>          
-            
+            <Scene key='login' component={Login} hideNavBar={true}/>
             <Scene 
               key="tabbar" 
               tabs 

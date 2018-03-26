@@ -45,6 +45,10 @@ export default (state={
 				name: action.itemName
 			})
 		};
+		case 'ADD_PLANT_TO_FIREBASE':
+			return {
+				...state, selectedItem: null
+			};
 		case 'DELETE_ITEM_FROM_LIST':
 			return{
 				...state,
@@ -63,9 +67,7 @@ export default (state={
 		case 'SELECT_ITEM':
 			return{
 				...state,
-				selectedItem: state.array.find(item => {
-					return place.name === action.itemName;
-				})
+				selectedItem: action.itemName
 			};
 		case 'DESELECT_ITEM':
 			return{
