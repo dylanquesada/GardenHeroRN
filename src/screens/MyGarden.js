@@ -2,14 +2,23 @@ import React, { Component } from 'react';
 import { View, Text, Button, Picker, ScrollView, ActivityIndicator } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import firebase from 'firebase';
-import { userUpdate, firebaseUpdate, getUserName, readFirebase, writeFirebase, userUpdateInternal, addPlant } from '../actions/idActions';
+import { getNumberOfPlants, userUpdate, firebaseUpdate, getUserName, readFirebase, writeFirebase, userUpdateInternal, addPlant } from '../actions/idActions';
 import { connect } from 'react-redux';
 import { FormLabel, FormInput, Card } from 'react-native-elements';
 import TrackerElement from '../components/tracker';
 
 
 class MyGarden extends Component {
-
+  state = {
+    numberOfPlants: 0,
+  };
+  async componentDidMount(){    
+    let plants = await getNumberOfPlants();
+    console.log('plants: '+ plants);
+    this.props.userUpdate({
+      prop: 'numberOfPlants', value: plants
+    });
+  }
   onAddPlantPress(){
     Actions.addPlant();
   }
@@ -28,6 +37,7 @@ class MyGarden extends Component {
     console.log("Actions.planGarden();");
     Actions.planGarden();
   }
+  
   renderPlantButtonOrLoading(){
     if(this.props.loading){
       return(
@@ -47,7 +57,7 @@ class MyGarden extends Component {
     }
   }
   renderTrackerOrPrompt(){
-    this.props.numberOfPlants = 2;
+    //this.props.numberOfPlants = 0;
     let garden = [{
       type: "tomato",
       percentComplete: 0.6
@@ -89,7 +99,7 @@ class MyGarden extends Component {
       <View style={{margin: 10}}>
         {this.renderTrackerOrPrompt()}
         {this.renderPlantButtonOrLoading()}
-        <Text>numberOfPlants: {this.props.numberOfPlants}!</Text>
+        <Text>numberOfPlants: {this.state.numberOfPlants}!</Text>
         <Button 
           onPress={this.onNavPress.bind(this)}
           title='To Plan Garden -->'
@@ -105,5 +115,5 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, {
-  userUpdate, firebaseUpdate, readFirebase, userUpdateInternal
+  userUpdate, firebaseUpdate, readFirebase, userUpdateInternal, getNumberOfPlants
 })(MyGarden);

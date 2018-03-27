@@ -72,6 +72,15 @@ export function deleteItemFromSelector(name){
 	};
 };
 
+export async function getNumberOfPlants(){
+	var db = firebase.database();
+	let userID = await getUserName();
+	var result = await readFirebase('users/' + userID + '/garden/plants/0');
+	result = result.numberOfPlants;
+	console.log('result: ' + result);
+	return result;
+}
+
 export async function readFirebase(path){
 	var data = await firebase.database().ref(path).once('value')
 		.then(function(dataSnapshot){

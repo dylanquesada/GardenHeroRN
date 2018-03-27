@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Button, Image, StyleSheet } from "react-native";
+import { View, Text, Button, Image, StyleSheet, Alert } from "react-native";
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import { addPlantToFirebase } from '../actions/idActions';
@@ -14,6 +14,9 @@ class AddPlant extends React.Component{
 		const { selectedItem } = this.props;
 		console.log("selectedItem: " + selectedItem);
 		addPlantToFirebase(selectedItem, plantDate);
+				Alert.alert(
+					'Success!'
+				)
 	}
 	onDonePress(){
 		Actions.myGarden();
