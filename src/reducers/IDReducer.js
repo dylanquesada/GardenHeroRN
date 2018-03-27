@@ -8,6 +8,7 @@ export default (state={
 	experience: '',
 	numberOfPlants: 0,
 	weeklyHours: '',
+	garden: [],
 	array: [],
 	selectedItem: null
 	 }, action) => {
@@ -21,6 +22,9 @@ export default (state={
 			break;			
 		case  'LOGIN_USER_FAIL':
 			return   {...state, loading: false, error: action.payload};
+			break;
+		case 'POPULATE_GARDEN':
+			return   {...state, garden: action.payload };
 			break;
 		case 'READ_FIREBASE_SUCCESS':
 			return {...state, [action.payload.prop]: action.payload.value};

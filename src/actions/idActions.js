@@ -89,6 +89,32 @@ export async function readFirebase(path){
 		return value;
 }
 
+export async function populateGarden(){
+	let today = Date.now();
+	let twentyOneDays = 1814400000;
+	console.log('populateGarden run, today in milliseconds since 1970: ' + today);
+	var db = firebase.database();
+	console.log("step 2");
+	let userID = await getUserName();
+	console.log("step 3");
+	let numberOfPlants = await getNumberOfPlants();
+	console.log("step 4");
+	var garden = await readFirebase('users/' + userID + '/garden');
+	console.log('loop start:');
+	let newGarden =[];
+	for(i = 1; i <= numberOfPlants; i++){
+		newGarden.push({
+			type: garden.plants[i].name,
+			percentComplete: ((today - garden.plants[i].plantDate) / twentyOneDays)
+		});
+		console.log("i name: " + garden.plants[i].name);
+		console.log("i plantDate: " + garden.plants[i].plantDate);
+		console.log("percentComplete: " + ((today - garden.plants[i].plantDate) / twentyOneDays));
+	}
+	console.log(newGarden);
+	return newGarden;
+}
+
 function writeFirebase(path, prop, value){
 	console.log("path: " + path);
 	console.log("prop: " + prop);

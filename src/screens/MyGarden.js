@@ -2,7 +2,17 @@ import React, { Component } from 'react';
 import { View, Text, Button, Picker, ScrollView, ActivityIndicator } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import firebase from 'firebase';
-import { getNumberOfPlants, userUpdate, firebaseUpdate, getUserName, readFirebase, writeFirebase, userUpdateInternal, addPlant } from '../actions/idActions';
+import { 
+  getNumberOfPlants, 
+  userUpdate, 
+  firebaseUpdate, 
+  getUserName, 
+  readFirebase, 
+  writeFirebase, 
+  userUpdateInternal, 
+  addPlant,
+  populateGarden
+   } from '../actions/idActions';
 import { connect } from 'react-redux';
 import { FormLabel, FormInput, Card } from 'react-native-elements';
 import TrackerElement from '../components/tracker';
@@ -11,12 +21,17 @@ import TrackerElement from '../components/tracker';
 class MyGarden extends Component {
   state = {
     numberOfPlants: 0,
+    garden: []
   };
   async componentDidMount(){    
     let plants = await getNumberOfPlants();
     console.log('plants: '+ plants);
     this.props.userUpdate({
       prop: 'numberOfPlants', value: plants
+    });
+    let newGarden = await populateGarden();
+    this.props.userUpdate({
+      prop: 'garden', value: newGarden
     });
   }
   onAddPlantPress(){
@@ -37,7 +52,10 @@ class MyGarden extends Component {
     console.log("Actions.planGarden();");
     Actions.planGarden();
   }
-  
+  async pop(){
+    console.log("async pop: ");
+
+  }
   renderPlantButtonOrLoading(){
     if(this.props.loading){
       return(
@@ -57,15 +75,7 @@ class MyGarden extends Component {
     }
   }
   renderTrackerOrPrompt(){
-    //this.props.numberOfPlants = 0;
-    let garden = [{
-      type: "tomato",
-      percentComplete: 1.0
-    },{
-      type: "potato",
-      percentComplete: 0.2
-    }];
-    if(this.props.numberOfPlants < 1){
+    if(this.props.garden.length < 1){
       return(
         <View> 
           <Card>
@@ -76,12 +86,12 @@ class MyGarden extends Component {
     }
     else{      
       var plants = [];
-      for(let i = 0; i <= 1; i++){
+      for(let i = 0; i < this.props.garden.length; i++){
         plants.push(
           <View key={i}>
             <TrackerElement
-              type={garden[i].type}
-              percentComplete={garden[i].percentComplete}
+              type={this.props.garden[i].type}
+              percentComplete={this.props.garden[i].percentComplete}
             />
           </View>
         )
@@ -99,7 +109,7 @@ class MyGarden extends Component {
       <View style={{margin: 10}}>
         {this.renderTrackerOrPrompt()}
         {this.renderPlantButtonOrLoading()}
-        <Text>numberOfPlants: {this.state.numberOfPlants}!</Text>
+        <Text>numberOfPlants: {this.props.numberOfPlants}!</Text>
         <Button 
           onPress={this.onNavPress.bind(this)}
           title='To Plan Garden -->'
@@ -110,10 +120,10 @@ class MyGarden extends Component {
 }
 
 const mapStateToProps = (state) => {
-  const { experience, error, numberOfPlants, email } = state.id;
-  return { experience, error, numberOfPlants, email }; 
+  const { experience, error, numberOfPlants, email, garden } = state.id;
+  return { experience, error, numberOfPlants, email, garden }; 
 };
 
 export default connect(mapStateToProps, {
-  userUpdate, firebaseUpdate, readFirebase, userUpdateInternal, getNumberOfPlants
+  userUpdate, firebaseUpdate, readFirebase, userUpdateInternal, getNumberOfPlants, populateGarden
 })(MyGarden);
