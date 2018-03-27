@@ -153,8 +153,8 @@ export const signUpUser=({ email, password}) => {
 	return(dispatch) => {
 		dispatch({ type: 'SIGN_UP_USER' });
 		firebase.auth().createUserWithEmailAndPassword(email, password)
-			.then(user => signUpUserSuccess(dispatch, user))
-			.catch(() => signUpUserFail(dispatch));
+			.then(() => signUpUserSuccess())
+			.catch(() => signUpUserFail());
 	};
 };
 
@@ -170,7 +170,14 @@ export const userUpdate = ({ prop, value }) => {
 	};
 };
 
-
+async function signUpUserSuccess(){
+	var db = firebase.database();
+	let userID = await getUserName();
+	db.ref('users/' + userID + '/garden/plants/0').set({
+		numberOfPlants: 0
+	});
+	Actions.myGarden();
+}
 const signOutFail = (dispatch) => {
 	dispatch( {type: "SIGN_OUT_FAIL", payload: "Log out failed"});
 };

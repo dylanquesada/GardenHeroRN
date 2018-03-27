@@ -13,7 +13,6 @@ class Login extends Component {
   	}
 
   	onSignUpPress(){
-  		this.props({loading: true});
   		const{email, password} = this.props;
       this.props.signUpUser({ email, password });
       Keyboard.dismiss();

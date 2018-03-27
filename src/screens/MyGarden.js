@@ -99,22 +99,30 @@ class MyGarden extends Component {
       }
       return(
         <View>
-          {plants}
+          <Card title='Garden Tracker'>
+            {plants}
+          </Card>
         </View>
       )
     }
   }
   render() {
     return (
-      <View style={{margin: 10}}>
-        {this.renderTrackerOrPrompt()}
-        {this.renderPlantButtonOrLoading()}
-        <Text>numberOfPlants: {this.props.numberOfPlants}!</Text>
-        <Button 
-          onPress={this.onNavPress.bind(this)}
-          title='To Plan Garden -->'
-        />        
-      </View>
+      <ScrollView>
+        <View style={{margin: 10}}>
+          {this.renderTrackerOrPrompt()}
+          <View style={{ marginTop: 20}}>
+            <Text>numberOfPlants: {this.props.numberOfPlants}!</Text>
+            {this.renderPlantButtonOrLoading()}
+            <View style={{ marginTop: 10}}>
+              <Button 
+                onPress={this.onNavPress.bind(this)}
+                title='To Plan Garden -->'
+              />   
+            </View>
+          </View>     
+        </View>
+      </ScrollView>
     )
   }
 }
