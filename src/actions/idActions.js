@@ -18,14 +18,19 @@ export async function addPlantToFirebase(name, date){
 	var numberOfPlants = await readFirebase(path);
 	console.log("numberOfPlants.numberOfPlants: " + numberOfPlants.numberOfPlants);
 	console.log("Path: " + path);
-	numberOfPlants.numberOfPlants += 1;
 	numberOfPlants = numberOfPlants.numberOfPlants;
+	numberOfPlants = pasrseInt(numberOfPlants);
+	numberOfPlants. += 1;
 	console.log('numberOfPlants: ' + numberOfPlants);
 	path = userID + '/garden/plants/' + numberOfPlants.toString();
 	console.log("path before first write: " + path);
-	db.ref("users/" + path).set({
-		type: name,
-		plantDate: plantDate
+	console.log('users/' + userID + '/garden/plants/0');
+	db.ref('users/' + userID + '/garden/plants/0').set({
+		numberOfPlants: (numberOfPlants+1).toString()
+	});
+	db.ref('users/' + userID + '/garden/plants/'+ (numberOfPlants+1).toString()).set({
+		name: name,
+		plantDate: date
 	});
 	return(dispatch) => {
 		dispatch({
