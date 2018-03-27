@@ -60,7 +60,7 @@ class MyGarden extends Component {
     //this.props.numberOfPlants = 0;
     let garden = [{
       type: "tomato",
-      percentComplete: 0.6
+      percentComplete: 1.0
     },{
       type: "potato",
       percentComplete: 0.2
