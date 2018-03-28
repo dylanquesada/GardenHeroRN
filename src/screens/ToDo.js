@@ -32,10 +32,19 @@ class ToDo extends React.Component{
 		}
 	}
 	selectDayHandler(day){
-		let today = Date.now();
-		// var result = this.props.tasks.filter(item => {
-		// 	return this.props.task.taskDate < 
-		// })
+		console.log("selectDayHandler init, day:" + day);
+		console.log(day.dateString);
+		let today = new Date(day.timestamp);
+		console.log("selectDayHandler init, day:" + day);
+		var result = this.props.tasks.filter(item => {
+			console.log("internal selectDayHandler filter, item: " + item);
+			return item.taskDate.setHours(0,0,0,0) == today.setHours(0,0,0,0); 
+		});
+		console.log('result: ' + result);
+		console.log('end reuslt');
+		this.props.userUpdate({
+			prop: 'selectedTasks', value: result
+		});
 	}
 	render(){
 		return(
@@ -46,7 +55,9 @@ class ToDo extends React.Component{
 						console.log('tasks populated, starting change from ms');
 						this.changeMillisecondsToDates(this.props.tasks);
 						console.log('changed');
+						console.log('day :' + day);
 						this.selectDayHandler(day);
+						console.log(day);
 					}}
 				/>
 
@@ -61,8 +72,8 @@ class ToDo extends React.Component{
 
 //TODO
 const mapStateToProps = (state) => {
-  const { tasks } = state.id;
-  return { tasks }; 
+  const { tasks, selectedTasks } = state.id;
+  return { tasks, selectedTasks }; 
 };
 
 export default connect(mapStateToProps, {

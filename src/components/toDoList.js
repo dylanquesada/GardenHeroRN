@@ -2,13 +2,15 @@ import React, { Component } from  'react';
 import { Text, FlatList, View } from 'react-native';
 import { Card } from 'react-native-elements';
 import { ListItem } from './listItem';
+import { connect } from 'react-redux';
 
-export default class ToDoList extends Component{
+class ToDoList extends Component{
 
 	render(){
-		if(2 > 0){
+		if(this.props.selectedTasks != null){
 			return(
 				<FlatList
+					data={this.props.selectedTasks}
 					renderItem={({ item }) =>(<ListItem title={item.task}/>) } 
 				/>
 			);
@@ -23,3 +25,13 @@ export default class ToDoList extends Component{
 		
 	}
 }
+
+
+const mapStateToProps = (state) => {
+  const { tasks, selectedTasks } = state.id;
+  return { tasks, selectedTasks }; 
+};
+
+export default connect(mapStateToProps, {
+
+})(ToDoList);
