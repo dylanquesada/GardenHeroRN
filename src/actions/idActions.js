@@ -15,6 +15,7 @@ export async function addPlantToFirebase(name, date){
 	let userID = await getUserName();
 	let path = 'users/' + userID + '/garden/plants/0';
 	var numberOfPlants = await getNumberOfPlants();
+	numberOfPlants = numberOfPlants * 1;
 	numberOfPlants += 1;
 	path = userID + '/garden/plants/' + numberOfPlants.toString();
 	db.ref('users/' + userID + '/garden/plants/0').set({
@@ -24,12 +25,20 @@ export async function addPlantToFirebase(name, date){
 		name: name,
 		plantDate: date
 	});
+	var garden = await getGarden();
+	populateTasksForAll(garden);
 	return(dispatch) => {
 		dispatch({
 			type: 'ADD_PLANT_TO_FIREBASE'
 		});
 	};
 };
+
+async function getGarden(){
+	let userID = await getUserName();
+	var garden = await readFirebase('users/' + userID + '/garden');
+	return garden;
+}
 
 export function deleteItem(){
 	return(dispatch) => {
@@ -115,10 +124,46 @@ export async function populateGarden(){
 	return newGarden;
 }
 
+async function getMasterGarden(){
+	var master = await readFirebase('master');
+	return master;
+}
+
+export async function populateTasksForAll(garden){
+	let userID = await getUserName();
+	let today = Date.now();
+	let oneDay = 86400000;
+	var master = await getMasterGarden();
+	//set plant tasks
+	let task = 'plant ' + garden.plants[garden.plants[0].numberOfPlants].name;
+	let done = await createTask(task, today);
+	console.log("done: " + done);
+	//set water tasks
+	// for(i = 1; i <= garden.plants[0].numberOfPlants; i++){
+	// 	let task = 'water ' + garden.plants[i].name;
+	// 	let taskDate = garden.plants[i].plantDate + oneDay;
+	// 	createTask(task, taskDate);
+	// 	for(j = 0; j < master.tomato.daysBetweenWatering.length; j++){
+	// 		taskDate = taskDate + oneDay + oneDay;
+	// 		createTask(task, taskDate);
+	// 	}
+	// }
+	// //set harvest tasks
+	// for(i = 1; i <= garden.plants[0].numberOfPlants; i++){
+	// 	let task = 'harvest ' + garden.plants[i].name;
+	// 	let taskDate = garden.plants[i].plantDate + (master.tomato.daysUntilHarvest * oneDay);
+	// 	for(j = taskDate; j <= today + (master.tomato.lifetime * oneDay); j+= (master.tomato.harvestInterval * oneDay)){
+	// 		createTask(task, j);
+	// 	}
+	// }
+
+}
+
 export async function createTask(task, taskDate){
 	let userID = await getUserName();
 	var db = firebase.database();
 	let numberOfTasks = await getNumberOfTasks();
+	numberOfTasks = numberOfTasks * 1;
 	numberOfTasks += 1;
 	db.ref('users/' + userID + '/garden/tasks/0').set({
 		numberOfTasks: (numberOfTasks).toString()
@@ -127,7 +172,7 @@ export async function createTask(task, taskDate){
 		task: task,
 		taskDate: taskDate
 	});
-	console.log('Tasks sent to FB');
+	return true;
 }
 
 export async function populateTasksArray(){
