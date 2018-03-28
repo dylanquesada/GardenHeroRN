@@ -26,7 +26,7 @@ export async function addPlantToFirebase(name, date){
 		plantDate: date
 	});
 	var garden = await getGarden();
-	populateTasksForAll(garden);
+	populateTasksForAdd(garden);
 	return(dispatch) => {
 		dispatch({
 			type: 'ADD_PLANT_TO_FIREBASE'
@@ -129,25 +129,25 @@ async function getMasterGarden(){
 	return master;
 }
 
-export async function populateTasksForAll(garden){
+export async function populateTasksForAdd(garden){
 	let userID = await getUserName();
 	let today = Date.now();
 	let oneDay = 86400000;
+	let numberOfPlants = garden.plants[0].numberOfPlants * 1;
 	var master = await getMasterGarden();
 	//set plant tasks
-	let task = 'plant ' + garden.plants[garden.plants[0].numberOfPlants].name;
+	let task = 'plant ' + garden.plants[numberOfPlants].name;
 	let done = await createTask(task, today);
-	console.log("done: " + done);
+	console.log("set plant tasks: " + done);
 	//set water tasks
-	// for(i = 1; i <= garden.plants[0].numberOfPlants; i++){
-	// 	let task = 'water ' + garden.plants[i].name;
-	// 	let taskDate = garden.plants[i].plantDate + oneDay;
-	// 	createTask(task, taskDate);
-	// 	for(j = 0; j < master.tomato.daysBetweenWatering.length; j++){
-	// 		taskDate = taskDate + oneDay + oneDay;
-	// 		createTask(task, taskDate);
-	// 	}
-	// }
+	let waterCounter = 0;
+	task = 'water ' + garden.plants[numberOfPlants].name;
+	let plantDate = garden.plants[numberOfPlants].plantDate;
+	for(let i = plantDate; i <= (plantDate + (master.tomato.lifetime * oneDay)); i+=((master.tomato.daysBetweenWatering[waterCounter] * oneDay))){
+		let water = await createTask(task, i);
+		console.log("water: " + water);
+		waterCounter++;
+	}
 	// //set harvest tasks
 	// for(i = 1; i <= garden.plants[0].numberOfPlants; i++){
 	// 	let task = 'harvest ' + garden.plants[i].name;
