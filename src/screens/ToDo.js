@@ -4,15 +4,15 @@ import Key from '../components/key';
 import  ToDoList from '../components/toDoList';
 import { Calendar } from 'react-native-calendars';
 export default class ToDo extends React.Component{
-	constructor(props){
-		super(props);
-		
-	}
+	async populateCalendar(){
 
+	}
 	render(){
 		return(
 			<View style={{ flex: 1 }}>
-				<Calendar />
+				<Calendar 
+					onDayPress={(day) => {console.log(day)}}
+				/>
 				<Key />
 				<ToDoList />			
   			</View>

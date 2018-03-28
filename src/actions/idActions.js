@@ -14,17 +14,9 @@ export async function addPlantToFirebase(name, date){
 	var db = firebase.database();
 	let userID = await getUserName();
 	let path = 'users/' + userID + '/garden/plants/0';
-	console.log("path: " + path);
-	var numberOfPlants = await readFirebase(path);
-	console.log("numberOfPlants.numberOfPlants: " + numberOfPlants.numberOfPlants);
-	console.log("Path: " + path);
-	numberOfPlants = numberOfPlants.numberOfPlants;
-	numberOfPlants = parseInt(numberOfPlants);
+	var numberOfPlants = await getNumberOfPlants();
 	numberOfPlants += 1;
-	console.log('numberOfPlants: ' + numberOfPlants);
 	path = userID + '/garden/plants/' + numberOfPlants.toString();
-	console.log("path before first write: " + path);
-	console.log('users/' + userID + '/garden/plants/0');
 	db.ref('users/' + userID + '/garden/plants/0').set({
 		numberOfPlants: (numberOfPlants).toString()
 	});
@@ -80,6 +72,14 @@ export async function getNumberOfPlants(){
 	console.log('result: ' + result);
 	return result;
 }
+export async function getNumberOfTasks(){
+	var db = firebase.database();
+	let userID = await getUserName();
+	var result = await readFirebase('users/' + userID + '/garden/tasks/0');
+	result = result.numberOfTasks;
+	console.log('numberOfTasks: ' + result);
+	return result;
+}
 
 export async function readFirebase(path){
 	var data = await firebase.database().ref(path).once('value')
@@ -114,6 +114,50 @@ export async function populateGarden(){
 	console.log(newGarden);
 	return newGarden;
 }
+
+export async function createTask(task, taskDate){
+	let userID = await getUserName();
+	var db = firebase.database();
+	let numberOfTasks = await getNumberOfTasks();
+	numberOfTasks += 1;
+	db.ref('users/' + userID + '/garden/tasks/0').set({
+		numberOfTasks: (numberOfTasks).toString()
+	});
+	db.ref('users/' + userID + '/garden/tasks/' + (numberOfTasks).toString()).set({
+		task: task,
+		taskDate: taskDate
+	});
+	console.log('Tasks sent to FB');
+}
+
+export async function populateTasksArray(){
+	let userID = await getUserName();
+	var db = firebase.database();
+	var garden = await readFirebase('users/' + userID + '/garden');
+	let tasks = [];
+	let numberOfTasks = await getNumberOfTasks();
+	for(i = 1; i <= numberOfTasks; i++){
+		tasks.push({
+			task: garden.tasks[i].task,
+			taskDate: garden.tasks[i].taskDate
+		});
+	}
+	return tasks;
+}
+
+// async function readTask(){
+// 	let userID = await getUserName();
+// 	var db = firebase.database();
+	
+// 	db.ref('users/' + userID + '/garden/tasks')
+// }
+
+// async function deleteTask(){
+// 	let userID = await getUserName();
+// 	var db = firebase.database();
+	
+// 	db.ref('users/' + userID + '/garden/tasks')
+// }
 
 function writeFirebase(path, prop, value){
 	console.log("path: " + path);
