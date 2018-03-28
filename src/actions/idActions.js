@@ -149,7 +149,12 @@ export async function populateTasksForAdd(garden){
 		waterCounter++;
 	}
 	// //set harvest tasks
-	// for(i = 1; i <= garden.plants[0].numberOfPlants; i++){
+	task = 'harvest ' + garden.plants[numberOfPlants].name;
+	for(let i = plantDate + (master.tomato.daysUntilHarvest * oneDay); i <= (plantDate + (master.tomato.lifetime * oneDay)); i+=(master.tomato.harvestInterval * oneDay)){
+		let harvest = await createTask(task, i);
+		console.log('harvest: ' + harvest);
+	}
+		// for(i = 1; i <= garden.plants[0].numberOfPlants; i++){
 	// 	let task = 'harvest ' + garden.plants[i].name;
 	// 	let taskDate = garden.plants[i].plantDate + (master.tomato.daysUntilHarvest * oneDay);
 	// 	for(j = taskDate; j <= today + (master.tomato.lifetime * oneDay); j+= (master.tomato.harvestInterval * oneDay)){
