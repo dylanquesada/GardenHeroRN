@@ -9,8 +9,7 @@ export default class ToDoList extends Component{
 		if(2 > 0){
 			return(
 				<FlatList
-					data={[{title: 'Plant Tomatoes', key: 'taask one'}, {title: 'Water Tomatos', key: 'task two'}]}
-					renderItem={({ item }) =>(<ListItem title={item.title}/>) } 
+					renderItem={({ item }) =>(<ListItem title={item.task}/>) } 
 				/>
 			);
 		}

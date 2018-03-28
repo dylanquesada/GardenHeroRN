@@ -10,7 +10,8 @@ export default (state={
 	weeklyHours: '',
 	garden: [],
 	array: [],
-	selectedItem: null
+	selectedItem: null,
+	tasks: []
 	 }, action) => {
 	console.log(action);
 	switch(action.type) {

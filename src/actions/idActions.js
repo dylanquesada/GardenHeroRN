@@ -154,14 +154,6 @@ export async function populateTasksForAdd(garden){
 		let harvest = await createTask(task, i);
 		console.log('harvest: ' + harvest);
 	}
-		// for(i = 1; i <= garden.plants[0].numberOfPlants; i++){
-	// 	let task = 'harvest ' + garden.plants[i].name;
-	// 	let taskDate = garden.plants[i].plantDate + (master.tomato.daysUntilHarvest * oneDay);
-	// 	for(j = taskDate; j <= today + (master.tomato.lifetime * oneDay); j+= (master.tomato.harvestInterval * oneDay)){
-	// 		createTask(task, j);
-	// 	}
-	// }
-
 }
 
 export async function createTask(task, taskDate){
@@ -170,6 +162,7 @@ export async function createTask(task, taskDate){
 	let numberOfTasks = await getNumberOfTasks();
 	numberOfTasks = numberOfTasks * 1;
 	numberOfTasks += 1;
+	//change state instead of fb
 	db.ref('users/' + userID + '/garden/tasks/0').set({
 		numberOfTasks: (numberOfTasks).toString()
 	});
