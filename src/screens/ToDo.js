@@ -27,6 +27,9 @@ class ToDo extends React.Component{
 		}
 	}
 	populateCalendar(){
+		const water = {key:'water', color: 'blue', selectedDotColor: 'blue'};
+		const plant = {key:'plant', color: 'black', selectedDotColor: 'black'};
+		const harvest = {key:'harvest', color: 'green', selectedDotColor: 'green'};
 		for(i =0; i < this.props.tasks.length; i++){
 
 		}
@@ -52,12 +55,8 @@ class ToDo extends React.Component{
 				<Calendar 
 					onDayPress={(day) => {
 						this.populateTasks();
-						console.log('tasks populated, starting change from ms');
 						this.changeMillisecondsToDates(this.props.tasks);
-						console.log('changed');
-						console.log('day :' + day);
 						this.selectDayHandler(day);
-						console.log(day);
 					}}
 				/>
 

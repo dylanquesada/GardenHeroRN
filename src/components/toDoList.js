@@ -5,7 +5,9 @@ import { ListItem } from './listItem';
 import { connect } from 'react-redux';
 
 class ToDoList extends Component{
-
+	state ={
+		selectedTasks: []
+	};
 	render(){
 		if(this.props.selectedTasks != null){
 			return(

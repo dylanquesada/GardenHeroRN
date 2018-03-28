@@ -59,19 +59,25 @@ class PlanGarden extends Component{
 				            selectedItem={this.props.weeklyHours}
 				            onChangeText={(selectedItem) => this.props.userUpdate({ prop: 'weeklyHours', value: selectedItem})} >
 				        </Dropdown>
-				        <Text>Garden dimensions</Text>
-				        <TextInput
-				        	keyboardType='numeric'
-				        	style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-	        				onChangeText={(length) => this.setState({length})}
-	        				value={this.state.length}
-				        />
-				        <TextInput
-				        	keyboardType='reg'
-				        	style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-	        				onChangeText={(height) => this.setState({height})}
-	        				value={this.state.height}
-				        />
+				        <View style={{
+				        	flexDirection: 'row', justifyContent: 'space-around'
+				        }}>
+					        <Text>Garden dimensions</Text>
+					        <TextInput
+					        	keyboardType='numeric'
+					        	style={{height: 40, width: 50, borderColor: 'gray', borderWidth: 1}}
+		        				onChangeText={(length) => this.setState({length})}
+		        				value={this.state.length}
+					        />
+					        <Text> Feet X </Text>
+					        <TextInput
+					        	keyboardType='numeric'
+					        	style={{height: 40, width: 50, borderColor: 'gray', borderWidth: 1}}
+		        				onChangeText={(height) => this.setState({height})}
+		        				value={this.state.height}
+					        />
+					        <Text> Feet</Text>
+					    </View>
 				        <Text>Zip code</Text>
 				        <TextInput
 				        	keyboardType='numeric'

@@ -6,6 +6,7 @@ import Login from './screens/Login';
 import PageTwo from './screens/PageTwo';
 import Account from './screens/Account';
 import AddPlant from './screens/AddPlant';
+import Notes from './screens/Notes';
 import MyGarden from './screens/MyGarden';
 import PlanGarden from './screens/PlanGarden';
 import PlantProfiles from './screens/PlantProfiles';
@@ -96,6 +97,7 @@ export default class Index extends React.Component {
             <Scene key="shoppingList" component={ShoppingList} title="Shopping List" /> 
             <Scene key="selectPlants" component={SelectPlants} title="Select Plants" />
             <Scene key="addPlant" component={AddPlant} title="Add Plant" /> 
+            <Scene key="notes" component={Notes} title="Log Garden Progress" />
         </Scene>
       </Router>
     );
