@@ -10,6 +10,32 @@ export function addItem(itemName){
 	};
 };
 
+export async function addNoteToFirebase(note){
+	var db = firebase.database();
+	let today = Date.now();
+	let userID = await getUserName();
+	let path = 'users/' + userID + '/garden/notes/0';
+	var numberOfNotes = await getNumberOfNotes();
+	numberOfNotes = numberOfNotes * 1;
+	numberOfNotes += 1;
+	db.ref('users/' + userID + '/garden/notes/0').set({
+		numberOfNotes: (numberOfNotes).toString()
+	});
+	db.ref('users/' + userID + '/garden/notes/' + numberOfNotes.toString()).set({
+		note: note,
+		timeStamp: today
+	});
+}
+
+export async function getNumberOfNotes(){
+	var db = firebase.database();
+	let userID = await getUserName();
+	var result = await readFirebase('users/' + userID + '/garden/notes/0');
+	result = result.numberOfNotes;
+	console.log('result: ' + result);
+	return result;
+}
+
 export async function addPlantToFirebase(name, date){
 	var db = firebase.database();
 	let userID = await getUserName();
@@ -241,7 +267,7 @@ export const signUpUser=({ email, password}) => {
 		dispatch({ type: 'SIGN_UP_USER' });
 		firebase.auth().createUserWithEmailAndPassword(email, password)
 			.then(() => signUpUserSuccess())
-			.catch(() => signUpUserFail());
+			.catch(() => {console.log('sign up fail')});
 	};
 };
 
@@ -262,6 +288,12 @@ async function signUpUserSuccess(){
 	let userID = await getUserName();
 	db.ref('users/' + userID + '/garden/plants/0').set({
 		numberOfPlants: 0
+	});
+	db.ref('users/' + userID + '/garden/notes/0').set({
+		numberOfNotes: 0
+	});
+	db.ref('users/' + userID + '/garden/tasks/0').set({
+		numberOfTasks: 0
 	});
 	Actions.myGarden();
 }

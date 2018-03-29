@@ -43,6 +43,9 @@ class MyGarden extends Component {
     writeFirebase("users/EPEDSx1cC7h3bze4tbkur6B0A122/demographics/", "numb", "1");
     //this.props.firebaseUpdate();
   }
+  onNotePress(){
+    Actions.notes();
+  }
   async onReadPress(){
     var x = await readFirebase("users/EPEDSx1cC7h3bze4tbkur6B0A122/demographics/numb");
     console.log("x: " + x);
@@ -118,7 +121,11 @@ class MyGarden extends Component {
               <Button 
                 onPress={this.onNavPress.bind(this)}
                 title='To Plan Garden -->'
-              />   
+              />  
+              <Button 
+                onPress={this.onNotePress.bind(this)}
+                title='Log your progress here'
+              />  
             </View>
           </View>     
         </View>

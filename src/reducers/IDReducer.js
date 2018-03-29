@@ -11,7 +11,10 @@ export default (state={
 	garden: [],
 	array: [],
 	selectedItem: null,
-	tasks: []
+	tasks: [],
+	plantHealth: '',
+	growth: '',
+	didDoTasks: ''
 	 }, action) => {
 	console.log(action);
 	switch(action.type) {

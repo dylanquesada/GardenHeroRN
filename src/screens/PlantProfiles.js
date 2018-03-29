@@ -19,23 +19,29 @@ export default class PlantProfiles extends Component{
       <Card style={styles.slide}>
   			<View>
   				{item.illustration}
-          <View style={{flexDirection: 'row'}}>
+          <View style={{flexDirection: 'row', marginTop: 5}}>
             <Image
               source={require('../pictures/sun.png')}
               style={styles.iconStyle}
             /><Text>{item.sun}</Text>
           </View>
-          <View style={{flexDirection: 'row'}}>
+          <View style={{flexDirection: 'row', marginTop: 5}}>
             <Image
               source={require('../pictures/watering-can.png')}
               style={styles.iconStyle}
             /><Text>{item.watering}</Text>
           </View>
-          <View style={{flexDirection: 'row'}}>
+          <View style={{flexDirection: 'row', marginTop: 5}}>
             <Image
               source={require('../pictures/thermometer.png')}
               style={styles.iconStyle}
             /><Text>{item.climate}</Text>
+          </View>
+          <View style={{flexDirection: 'row', marginTop: 5}}>
+            <Image
+              source={require('../pictures/planting.png')}
+              style={styles.iconStyle}
+            /><Text>{item.planting}</Text>
           </View>
   			</View>
       </Card>
@@ -48,6 +54,7 @@ export default class PlantProfiles extends Component{
         watering: 'Needs to be watered 2x a week',
         sun: 'Requires full sun',
         climate: 'Grows best in warm climates',
+        planting: 'Needs 8 inch spacing',
         illustration: <Image 
           source={require('../pictures/tomato.png')}
           style={styles.pictureInternal}
@@ -55,9 +62,10 @@ export default class PlantProfiles extends Component{
     },
     {
         title: 'Cabbage',
-        watering: 'Needs to be watered 2x a week',
+        watering: 'Watered 2x a week',
         sun: 'Requires full sun',
-        climate: 'Grows best in warm climates',       
+        climate: 'Grows best in warm climate',
+        planting: 'Needs 8 inch spacing',       
         illustration: <Image 
           source={require('../pictures/cabbage.png')}
           style={styles.pictureInternal}
@@ -67,7 +75,9 @@ export default class PlantProfiles extends Component{
         title: 'Carrots',
         watering: 'Needs to be watered 2x a week',
         sun: 'Requires full sun',
-        climate: 'Grows best in warm climates',        illustration: <Image 
+        climate: 'Grows best in warm climates',
+        planting: 'Needs 8 inch spacing',        
+        illustration: <Image 
           source={require('../pictures/plantprofiles.png')}
           style={styles.pictureInternal}
         />
@@ -77,6 +87,7 @@ export default class PlantProfiles extends Component{
         watering: 'Needs to be watered 2x a week',
         sun: 'Requires full sun',
         climate: 'Grows best in warm climates',
+        planting: 'Needs 8 inch spacing',
         illustration: <Image 
           source={require('../pictures/bell-pepper.png')}
           style={styles.pictureInternal}
@@ -87,6 +98,7 @@ export default class PlantProfiles extends Component{
         watering: 'Needs to be watered 2x a week',
         sun: 'Requires full sun',
         climate: 'Grows best in warm climates',
+        planting: 'Needs 8 inch spacing',
         illustration: <Image 
           source={require('../pictures/aubergine.png')}
           style={styles.pictureInternal}
@@ -97,6 +109,7 @@ export default class PlantProfiles extends Component{
         watering: 'Needs to be watered 2x a week',
         sun: 'Requires full sun',
         climate: 'Grows best in warm climates',
+        planting: 'Needs 8 inch spacing',
         illustration: <Image 
           source={require('../pictures/lettuce.png')}
           style={styles.pictureInternal}
@@ -126,6 +139,7 @@ export default class PlantProfiles extends Component{
 
 let styles = StyleSheet.create({
   slide: {
+    marginTop: 10,
   	alignContent: 'space-between',
     height: 500, 
     width: viewportWidth
