@@ -111,25 +111,30 @@ class MyGarden extends Component {
   }
   render() {
     return (
-      <ScrollView>
-        <View style={{margin: 10}}>
-          {this.renderTrackerOrPrompt()}
-          <View style={{ marginTop: 20}}>
-            <Text>numberOfPlants: {this.props.numberOfPlants}!</Text>
+      <View>
+        <ScrollView>
+          <View style={{margin: 10}}>
+            {this.renderTrackerOrPrompt()}
+          </View>
+        </ScrollView>
+          <Card title='Gardener Tools'>
+          <View style={{ marginBottom: 20, margin: 20}}>              
             {this.renderPlantButtonOrLoading()}
             <View style={{ marginTop: 10}}>
               <Button 
                 onPress={this.onNavPress.bind(this)}
-                title='To Plan Garden -->'
-              />  
+                title='Plan Your Garden'
+              />
+            </View>
+            <View style={{ marginTop: 10}}>  
               <Button 
                 onPress={this.onNotePress.bind(this)}
-                title='Log your progress here'
-              />  
+                title='Log Your Progress'
+              />
             </View>
-          </View>     
-        </View>
-      </ScrollView>
+          </View>
+        </Card>
+      </View>
     )
   }
 }
