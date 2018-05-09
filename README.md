@@ -1,3 +1,6 @@
+Garden Hero is a React Native mobile application built on designs from a UI/UX designer that helps gardeners take care of their gardens. The purpose is to provide individualized prescriptive care tasks and calendars to encourage gardeners and optimize crop yield, while linking appropriate web resources and collecting data for further analytics. The application uses Google's Firebase Realtime DB for its authentication and database. This individual project served as a capstone for a 12 week bootcamp.
+
+
 This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app).
 
 Below you'll find information about performing common tasks. The most recent version of this guide is available [here](https://github.com/react-community/create-react-native-app/blob/master/react-native-scripts/template/README.md).
